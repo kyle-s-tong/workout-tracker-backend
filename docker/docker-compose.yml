@@ -1,0 +1,33 @@
+version: '3.6'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: workout_mysql
+    ports:
+     - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+     - "${MYSQL_STORAGE_PATH}:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123test123
+      MYSQL_DATABASE: workout_app
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: userpass
+
+  backend:
+    build: backend
+    container_name: workout_backend
+    depends_on:
+      - mysql
+    ports:
+     - "${BACKEND_LOCAL_PORT:-8080}:80"
+    volumes:
+     - "${BACKEND_PATH}:/var/www:${BACKEND_MOUNTING_OPTION:-delegated}"
+    restart: always
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+       - subnet: 192.168.140.0/24
