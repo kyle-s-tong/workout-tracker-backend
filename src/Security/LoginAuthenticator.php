@@ -14,14 +14,18 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class TokenAuthenticator extends AbstractGuardAuthenticator
+class LoginAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
 
-    public function __construct(EntityManagerInterface $em)
+    private $passwordEncoder;
+
+    public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->em = $em;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
@@ -31,7 +35,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        return (('register' !== $request->get('_route') && $request->isMethod('POST')) || ('login' !== $request->get('_route') && $request->isMethod('POST'))) ? false : true;
+        return ($request->get('_route') === 'login' && $request->isMethod('POST'));
     }
 
     /**
@@ -40,59 +44,31 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function getCredentials(Request $request)
     {
+        $content = json_decode($request->getContent());
+
         return array(
-            'token' => $request->headers->get('x-authentication'),
+            'email' => $content->email,
+            'password' => $content->password
         );
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $apiToken = $credentials['token'];
+        $email = $credentials['email'];
+        $password = $credentials['password'];
 
-        if (null === $apiToken) {
-            return;
-        }
-
-        $userToken = $this->em->getRepository(Token::class)
-            ->findOneBy(['value' => $apiToken]);
-
-        if (!$userToken) {
-            return;
-        } 
-
-        $user = $userToken->getUser();
-        if (!$user) {
+        if (null === $email || null === $password) {
             return;
         }
 
         // if a User object, checkCredentials() is called
         return $this->em->getRepository(User::class)
-            ->find($user);
+            ->findOneByEmail($email);
     }
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        $apiToken = $credentials['token'];
-
-        $token = $this->em->getRepository(Token::class)
-        ->findOneBy(['value' => $apiToken]);
-        
-        $isEnabled = $token->getEnabled();
-        $isExpired = $token->getExpiryDate() < new \DateTime();
-
-        if ($isEnabled && !$isExpired) {
-            // return true to cause authentication success
-            return true;
-        } 
-        
-        if ($isEnabled && $isExpired) {
-            // disable the token because it has expired
-            $token->setEnabled(false);
-            $this->em->persist($token);
-            $this->em->flush();
-        }
-
-        return false;
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
