@@ -24,13 +24,46 @@ class Exercise
     private $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Workout", inversedBy="exercises")
+     * @ORM\Column(type="integer")
+     */
+    private $numberOfSets;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $reps;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rest;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Exercise", inversedBy="superset")
+     */
+    private $superset;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Workout", inversedBy="exercises")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $workout;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ExerciseSummary", inversedBy="exercises")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $exerciseSummary;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseRecord", mappedBy="exercise", orphanRemoval=true)
+     */
+    private $exerciseRecords;
+
     public function __construct()
     {
-        $this->workout = new ArrayCollection();
+        $this->superset = new ArrayCollection();
+        $this->exerciseRecords = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,27 +83,118 @@ class Exercise
         return $this;
     }
 
-    /**
-     * @return Collection|Workout[]
-     */
-    public function getWorkout(): Collection
+    public function getWorkout(): ?Workout
     {
         return $this->workout;
     }
 
-    public function addWorkout(Workout $workout): self
+    public function setWorkout(?Workout $workout): self
     {
-        if (!$this->workout->contains($workout)) {
-            $this->workout[] = $workout;
+        $this->workout = $workout;
+
+        return $this;
+    }
+
+    public function getNumberOfSets(): ?int
+    {
+        return $this->numberOfSets;
+    }
+
+    public function setNumberOfSets(int $numberOfSets): self
+    {
+        $this->numberOfSets = $numberOfSets;
+
+        return $this;
+    }
+
+    public function getReps(): ?int
+    {
+        return $this->reps;
+    }
+
+    public function setReps(int $reps): self
+    {
+        $this->reps = $reps;
+
+        return $this;
+    }
+
+    public function getRest(): ?int
+    {
+        return $this->rest;
+    }
+
+    public function setRest(?int $rest): self
+    {
+        $this->rest = $rest;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getSuperset(): Collection
+    {
+        return $this->superset;
+    }
+
+    public function addSuperset(self $superset): self
+    {
+        if (!$this->superset->contains($superset)) {
+            $this->superset[] = $superset;
         }
 
         return $this;
     }
 
-    public function removeWorkout(Workout $workout): self
+    public function removeSuperset(self $superset): self
     {
-        if ($this->workout->contains($workout)) {
-            $this->workout->removeElement($workout);
+        if ($this->superset->contains($superset)) {
+            $this->superset->removeElement($superset);
+        }
+
+        return $this;
+    }
+
+    public function getExerciseSummary(): ?ExerciseSummary
+    {
+        return $this->exerciseSummary;
+    }
+
+    public function setExerciseSummary(?ExerciseSummary $exerciseSummary): self
+    {
+        $this->exerciseSummary = $exerciseSummary;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ExerciseRecord[]
+     */
+    public function getExerciseRecords(): Collection
+    {
+        return $this->exerciseRecords;
+    }
+
+    public function addExerciseRecord(ExerciseRecord $exerciseRecord): self
+    {
+        if (!$this->exerciseRecords->contains($exerciseRecord)) {
+            $this->exerciseRecords[] = $exerciseRecord;
+            $exerciseRecord->setExercise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExerciseRecord(ExerciseRecord $exerciseRecord): self
+    {
+        if ($this->exerciseRecords->contains($exerciseRecord)) {
+            $this->exerciseRecords->removeElement($exerciseRecord);
+            // set the owning side to null (unless already changed)
+            if ($exerciseRecord->getExercise() === $this) {
+                $exerciseRecord->setExercise(null);
+            }
         }
 
         return $this;

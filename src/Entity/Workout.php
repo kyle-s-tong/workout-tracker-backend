@@ -30,13 +30,19 @@ class Workout
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Exercise", mappedBy="workout")
+     * @ORM\OneToMany(targetEntity="App\Entity\Exercise", mappedBy="workout", orphanRemoval=true)
      */
     private $exercises;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\WorkoutRecord", mappedBy="workout", orphanRemoval=true)
+     */
+    private $workoutRecords;
 
     public function __construct()
     {
         $this->exercises = new ArrayCollection();
+        $this->workoutRecords = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,6 +97,37 @@ class Workout
         if ($this->exercises->contains($exercise)) {
             $this->exercises->removeElement($exercise);
             $exercise->removeWorkout($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|WorkoutRecord[]
+     */
+    public function getWorkoutRecords(): Collection
+    {
+        return $this->workoutRecords;
+    }
+
+    public function addWorkoutRecord(WorkoutRecord $workoutRecord): self
+    {
+        if (!$this->workoutRecords->contains($workoutRecord)) {
+            $this->workoutRecords[] = $workoutRecord;
+            $workoutRecord->setWorkout($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkoutRecord(WorkoutRecord $workoutRecord): self
+    {
+        if ($this->workoutRecords->contains($workoutRecord)) {
+            $this->workoutRecords->removeElement($workoutRecord);
+            // set the owning side to null (unless already changed)
+            if ($workoutRecord->getWorkout() === $this) {
+                $workoutRecord->setWorkout(null);
+            }
         }
 
         return $this;
