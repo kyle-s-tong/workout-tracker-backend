@@ -286,6 +286,1916 @@ paths:
                     $ref: '#/definitions/User'
                   relationships:
                     properties: {  }
+  /routines/:
+    get:
+      tags:
+        - routines
+      summary: 'Routine List'
+      operationId: listRoutine
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/routines?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/routines?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/routines?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: routines
+                    attributes:
+                      $ref: '#/definitions/Routine'
+                    relationships:
+                      properties: {  }
+    post:
+      tags:
+        - routines
+      summary: 'Add Routine'
+      operationId: addRoutine
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addRoutine
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: routines
+                  attributes:
+                    $ref: '#/definitions/Routine'
+                  relationships:
+                    properties: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /routines
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: routines
+                  attributes:
+                    $ref: '#/definitions/Routine'
+                  relationships:
+                    properties: {  }
+  '/routines/{Routine_id}':
+    patch:
+      tags:
+        - routines
+      summary: 'Edit Routine'
+      operationId: editRoutine
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editRoutine
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: routines
+                  attributes:
+                    $ref: '#/definitions/Routine'
+                  relationships:
+                    properties: {  }
+        -
+          name: Routine_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /routines
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: routines
+                  attributes:
+                    $ref: '#/definitions/Routine'
+                  relationships:
+                    properties: {  }
+    delete:
+      tags:
+        - routines
+      summary: 'Delete Routine'
+      operationId: deleteRoutine
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Routine_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /routines
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: routines
+                  attributes:
+                    $ref: '#/definitions/Routine'
+                  relationships:
+                    properties: {  }
+    get:
+      tags:
+        - routines
+      summary: 'Get Routine'
+      operationId: viewRoutine
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Routine_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /routines
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: routines
+                  attributes:
+                    $ref: '#/definitions/Routine'
+                  relationships:
+                    properties: {  }
+  /workouts/:
+    get:
+      tags:
+        - workouts
+      summary: 'Workout List'
+      operationId: listWorkout
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/workouts?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/workouts?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/workouts?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: workouts
+                    attributes:
+                      $ref: '#/definitions/Workout'
+                    relationships:
+                      properties:
+                        user:
+                          $ref: '#/definitions/User_relation'
+                        exercises:
+                          type: array
+                          items:
+                            $ref: '#/definitions/Exercise_relation'
+                        workoutRecords:
+                          type: array
+                          items:
+                            $ref: '#/definitions/WorkoutRecord_relation'
+    post:
+      tags:
+        - workouts
+      summary: 'Add Workout'
+      operationId: addWorkout
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addWorkout
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: workouts
+                  attributes:
+                    $ref: '#/definitions/Workout'
+                  relationships:
+                    properties:
+                      user:
+                        $ref: '#/definitions/User_relation'
+                      exercises:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workoutRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/WorkoutRecord_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /workouts
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workouts
+                  attributes:
+                    $ref: '#/definitions/Workout'
+                  relationships:
+                    properties:
+                      user:
+                        $ref: '#/definitions/User_relation'
+                      exercises:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workoutRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/WorkoutRecord_relation'
+  '/workouts/{Workout_id}':
+    patch:
+      tags:
+        - workouts
+      summary: 'Edit Workout'
+      operationId: editWorkout
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editWorkout
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workouts
+                  attributes:
+                    $ref: '#/definitions/Workout'
+                  relationships:
+                    properties:
+                      user:
+                        $ref: '#/definitions/User_relation'
+                      exercises:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workoutRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/WorkoutRecord_relation'
+        -
+          name: Workout_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /workouts
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workouts
+                  attributes:
+                    $ref: '#/definitions/Workout'
+                  relationships:
+                    properties:
+                      user:
+                        $ref: '#/definitions/User_relation'
+                      exercises:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workoutRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/WorkoutRecord_relation'
+    delete:
+      tags:
+        - workouts
+      summary: 'Delete Workout'
+      operationId: deleteWorkout
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Workout_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /workouts
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workouts
+                  attributes:
+                    $ref: '#/definitions/Workout'
+                  relationships:
+                    properties:
+                      user:
+                        $ref: '#/definitions/User_relation'
+                      exercises:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workoutRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/WorkoutRecord_relation'
+    get:
+      tags:
+        - workouts
+      summary: 'Get Workout'
+      operationId: viewWorkout
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Workout_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /workouts
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workouts
+                  attributes:
+                    $ref: '#/definitions/Workout'
+                  relationships:
+                    properties:
+                      user:
+                        $ref: '#/definitions/User_relation'
+                      exercises:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workoutRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/WorkoutRecord_relation'
+  /exercises/:
+    get:
+      tags:
+        - exercises
+      summary: 'Exercise List'
+      operationId: listExercise
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/exercises?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/exercises?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/exercises?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: exercises
+                    attributes:
+                      $ref: '#/definitions/Exercise'
+                    relationships:
+                      properties:
+                        superset:
+                          type: array
+                          items:
+                            $ref: '#/definitions/Exercise_relation'
+                        workout:
+                          $ref: '#/definitions/Workout_relation'
+                        exerciseSummary:
+                          $ref: '#/definitions/ExerciseSummary_relation'
+                        exerciseRecords:
+                          type: array
+                          items:
+                            $ref: '#/definitions/ExerciseRecord_relation'
+    post:
+      tags:
+        - exercises
+      summary: 'Add Exercise'
+      operationId: addExercise
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addExercise
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: exercises
+                  attributes:
+                    $ref: '#/definitions/Exercise'
+                  relationships:
+                    properties:
+                      superset:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseSummary:
+                        $ref: '#/definitions/ExerciseSummary_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercises
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercises
+                  attributes:
+                    $ref: '#/definitions/Exercise'
+                  relationships:
+                    properties:
+                      superset:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseSummary:
+                        $ref: '#/definitions/ExerciseSummary_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+  '/exercises/{Exercise_id}':
+    patch:
+      tags:
+        - exercises
+      summary: 'Edit Exercise'
+      operationId: editExercise
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editExercise
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercises
+                  attributes:
+                    $ref: '#/definitions/Exercise'
+                  relationships:
+                    properties:
+                      superset:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseSummary:
+                        $ref: '#/definitions/ExerciseSummary_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+        -
+          name: Exercise_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercises
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercises
+                  attributes:
+                    $ref: '#/definitions/Exercise'
+                  relationships:
+                    properties:
+                      superset:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseSummary:
+                        $ref: '#/definitions/ExerciseSummary_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+    delete:
+      tags:
+        - exercises
+      summary: 'Delete Exercise'
+      operationId: deleteExercise
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Exercise_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercises
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercises
+                  attributes:
+                    $ref: '#/definitions/Exercise'
+                  relationships:
+                    properties:
+                      superset:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseSummary:
+                        $ref: '#/definitions/ExerciseSummary_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+    get:
+      tags:
+        - exercises
+      summary: 'Get Exercise'
+      operationId: viewExercise
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Exercise_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercises
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercises
+                  attributes:
+                    $ref: '#/definitions/Exercise'
+                  relationships:
+                    properties:
+                      superset:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Exercise_relation'
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseSummary:
+                        $ref: '#/definitions/ExerciseSummary_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+  /workout/records/:
+    get:
+      tags:
+        - workout_records
+      summary: 'WorkoutRecord List'
+      operationId: listWorkoutRecord
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/workout/records?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/workout/records?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/workout/records?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: workout_records
+                    attributes:
+                      $ref: '#/definitions/WorkoutRecord'
+                    relationships:
+                      properties:
+                        workout:
+                          $ref: '#/definitions/Workout_relation'
+                        exerciseRecords:
+                          type: array
+                          items:
+                            $ref: '#/definitions/ExerciseRecord_relation'
+    post:
+      tags:
+        - workout_records
+      summary: 'Add WorkoutRecord'
+      operationId: addWorkoutRecord
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addWorkoutRecord
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: workout_records
+                  attributes:
+                    $ref: '#/definitions/WorkoutRecord'
+                  relationships:
+                    properties:
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /workout/records
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workout_records
+                  attributes:
+                    $ref: '#/definitions/WorkoutRecord'
+                  relationships:
+                    properties:
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+  '/workout/records/{WorkoutRecord_id}':
+    patch:
+      tags:
+        - workout_records
+      summary: 'Edit WorkoutRecord'
+      operationId: editWorkoutRecord
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editWorkoutRecord
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workout_records
+                  attributes:
+                    $ref: '#/definitions/WorkoutRecord'
+                  relationships:
+                    properties:
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+        -
+          name: WorkoutRecord_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /workout/records
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workout_records
+                  attributes:
+                    $ref: '#/definitions/WorkoutRecord'
+                  relationships:
+                    properties:
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+    delete:
+      tags:
+        - workout_records
+      summary: 'Delete WorkoutRecord'
+      operationId: deleteWorkoutRecord
+      produces:
+        - application/json
+      parameters:
+        -
+          name: WorkoutRecord_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /workout/records
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workout_records
+                  attributes:
+                    $ref: '#/definitions/WorkoutRecord'
+                  relationships:
+                    properties:
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+    get:
+      tags:
+        - workout_records
+      summary: 'Get WorkoutRecord'
+      operationId: viewWorkoutRecord
+      produces:
+        - application/json
+      parameters:
+        -
+          name: WorkoutRecord_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /workout/records
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: workout_records
+                  attributes:
+                    $ref: '#/definitions/WorkoutRecord'
+                  relationships:
+                    properties:
+                      workout:
+                        $ref: '#/definitions/Workout_relation'
+                      exerciseRecords:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+  /exercise/records/:
+    get:
+      tags:
+        - exercise_records
+      summary: 'ExerciseRecord List'
+      operationId: listExerciseRecord
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/exercise/records?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/exercise/records?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/exercise/records?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: exercise_records
+                    attributes:
+                      $ref: '#/definitions/ExerciseRecord'
+                    relationships:
+                      properties:
+                        exercise:
+                          $ref: '#/definitions/Exercise_relation'
+                        workoutRecord:
+                          $ref: '#/definitions/WorkoutRecord_relation'
+                        sets:
+                          type: array
+                          items:
+                            $ref: '#/definitions/ExerciseRecordSet_relation'
+    post:
+      tags:
+        - exercise_records
+      summary: 'Add ExerciseRecord'
+      operationId: addExerciseRecord
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addExerciseRecord
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: exercise_records
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecord'
+                  relationships:
+                    properties:
+                      exercise:
+                        $ref: '#/definitions/Exercise_relation'
+                      workoutRecord:
+                        $ref: '#/definitions/WorkoutRecord_relation'
+                      sets:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecordSet_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercise/records
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_records
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecord'
+                  relationships:
+                    properties:
+                      exercise:
+                        $ref: '#/definitions/Exercise_relation'
+                      workoutRecord:
+                        $ref: '#/definitions/WorkoutRecord_relation'
+                      sets:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecordSet_relation'
+  '/exercise/records/{ExerciseRecord_id}':
+    patch:
+      tags:
+        - exercise_records
+      summary: 'Edit ExerciseRecord'
+      operationId: editExerciseRecord
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editExerciseRecord
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_records
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecord'
+                  relationships:
+                    properties:
+                      exercise:
+                        $ref: '#/definitions/Exercise_relation'
+                      workoutRecord:
+                        $ref: '#/definitions/WorkoutRecord_relation'
+                      sets:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecordSet_relation'
+        -
+          name: ExerciseRecord_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercise/records
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_records
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecord'
+                  relationships:
+                    properties:
+                      exercise:
+                        $ref: '#/definitions/Exercise_relation'
+                      workoutRecord:
+                        $ref: '#/definitions/WorkoutRecord_relation'
+                      sets:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecordSet_relation'
+    delete:
+      tags:
+        - exercise_records
+      summary: 'Delete ExerciseRecord'
+      operationId: deleteExerciseRecord
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ExerciseRecord_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercise/records
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_records
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecord'
+                  relationships:
+                    properties:
+                      exercise:
+                        $ref: '#/definitions/Exercise_relation'
+                      workoutRecord:
+                        $ref: '#/definitions/WorkoutRecord_relation'
+                      sets:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecordSet_relation'
+    get:
+      tags:
+        - exercise_records
+      summary: 'Get ExerciseRecord'
+      operationId: viewExerciseRecord
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ExerciseRecord_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercise/records
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_records
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecord'
+                  relationships:
+                    properties:
+                      exercise:
+                        $ref: '#/definitions/Exercise_relation'
+                      workoutRecord:
+                        $ref: '#/definitions/WorkoutRecord_relation'
+                      sets:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ExerciseRecordSet_relation'
+  /exercise/record/sets/:
+    get:
+      tags:
+        - exercise_record_sets
+      summary: 'ExerciseRecordSet List'
+      operationId: listExerciseRecordSet
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/exercise/record/sets?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/exercise/record/sets?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/exercise/record/sets?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: exercise_record_sets
+                    attributes:
+                      $ref: '#/definitions/ExerciseRecordSet'
+                    relationships:
+                      properties:
+                        exerciseRecord:
+                          $ref: '#/definitions/ExerciseRecord_relation'
+    post:
+      tags:
+        - exercise_record_sets
+      summary: 'Add ExerciseRecordSet'
+      operationId: addExerciseRecordSet
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addExerciseRecordSet
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: exercise_record_sets
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecordSet'
+                  relationships:
+                    properties:
+                      exerciseRecord:
+                        $ref: '#/definitions/ExerciseRecord_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercise/record/sets
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_record_sets
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecordSet'
+                  relationships:
+                    properties:
+                      exerciseRecord:
+                        $ref: '#/definitions/ExerciseRecord_relation'
+  '/exercise/record/sets/{ExerciseRecordSet_id}':
+    patch:
+      tags:
+        - exercise_record_sets
+      summary: 'Edit ExerciseRecordSet'
+      operationId: editExerciseRecordSet
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editExerciseRecordSet
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_record_sets
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecordSet'
+                  relationships:
+                    properties:
+                      exerciseRecord:
+                        $ref: '#/definitions/ExerciseRecord_relation'
+        -
+          name: ExerciseRecordSet_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercise/record/sets
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_record_sets
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecordSet'
+                  relationships:
+                    properties:
+                      exerciseRecord:
+                        $ref: '#/definitions/ExerciseRecord_relation'
+    delete:
+      tags:
+        - exercise_record_sets
+      summary: 'Delete ExerciseRecordSet'
+      operationId: deleteExerciseRecordSet
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ExerciseRecordSet_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercise/record/sets
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_record_sets
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecordSet'
+                  relationships:
+                    properties:
+                      exerciseRecord:
+                        $ref: '#/definitions/ExerciseRecord_relation'
+    get:
+      tags:
+        - exercise_record_sets
+      summary: 'Get ExerciseRecordSet'
+      operationId: viewExerciseRecordSet
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ExerciseRecordSet_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /exercise/record/sets
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: exercise_record_sets
+                  attributes:
+                    $ref: '#/definitions/ExerciseRecordSet'
+                  relationships:
+                    properties:
+                      exerciseRecord:
+                        $ref: '#/definitions/ExerciseRecord_relation'
 securityDefinitions:
   api_key:
     type: apiKey
@@ -301,6 +2211,151 @@ definitions:
         type: object
       password:
         type: string
+  Routine:
+    type: object
+    properties:
+      name:
+        type: string
+  Workout:
+    type: object
+    properties:
+      title:
+        type: string
+  User_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - users
+        example: users
+      id:
+        type: integer
+        minimum: 1
+        description: 'User ID'
+        example: 50
+  Exercise:
+    type: object
+    properties:
+      title:
+        type: string
+      numberOfSets:
+        type: integer
+        format: int32
+      reps:
+        type: integer
+        format: int32
+      rest:
+        type: integer
+        format: int32
+  ExerciseSummary_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - exercise_summaries
+        example: exercise_summaries
+      id:
+        type: integer
+        minimum: 1
+        description: 'ExerciseSummary ID'
+        example: 29
+  WorkoutRecord:
+    type: object
+    properties:
+      dateRecorded:
+        type: string
+        format: date-time
+  Workout_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - workouts
+        example: workouts
+      id:
+        type: integer
+        minimum: 1
+        description: 'Workout ID'
+        example: 58
+  ExerciseRecord:
+    type: object
+    properties:
+      title:
+        type: string
+      dateRecorded:
+        type: string
+        format: date-time
+      isComplete:
+        type: boolean
+  Exercise_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - exercises
+        example: exercises
+      id:
+        type: integer
+        minimum: 1
+        description: 'Exercise ID'
+        example: 73
+  WorkoutRecord_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - workout_records
+        example: workout_records
+      id:
+        type: integer
+        minimum: 1
+        description: 'WorkoutRecord ID'
+        example: 36
+  ExerciseRecordSet_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - exercise_record_sets
+        example: exercise_record_sets
+      id:
+        type: integer
+        minimum: 1
+        description: 'ExerciseRecordSet ID'
+        example: 89
+  ExerciseRecordSet:
+    type: object
+    properties:
+      reps:
+        type: integer
+        format: int32
+      weight:
+        type: number
+        format: decimal
+      rest:
+        type: integer
+        format: int32
+      isComplete:
+        type: boolean
+  ExerciseRecord_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - exercise_records
+        example: exercise_records
+      id:
+        type: integer
+        minimum: 1
+        description: 'ExerciseRecord ID'
+        example: 21
 externalDocs:
   description: 'Find out more about Swagger'
   url: 'http://swagger.io'

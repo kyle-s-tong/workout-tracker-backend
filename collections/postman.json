@@ -130,6 +130,768 @@
                     }
                 }
             ]
+        },
+        {
+            "name": "Routine",
+            "description": "",
+            "item": [
+                {
+                    "name": "Routine List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/routines\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/routines",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Routine",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"routines\",\n        \"attributes\": {\n            \"name\": \"string\"\n        },\n        \"relationships\": []\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/routines\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/routines",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Routine",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"routines\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\"\n        },\n        \"relationships\": []\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/routines\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/routines",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Routine",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/routines\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/routines",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Routine",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/routines\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/routines",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Workout",
+            "description": "",
+            "item": [
+                {
+                    "name": "Workout List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/workouts\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workouts",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Workout",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"workouts\",\n        \"attributes\": {\n            \"title\": \"string\"\n        },\n        \"relationships\": {\n            \"user\": {\n                \"data\": {\n                    \"type\": \"users\",\n                    \"id\": \"1\"\n                }\n            },\n            \"exercises\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercises\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"workoutRecords\": {\n                \"data\": [\n                    {\n                        \"type\": \"workout_records\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/workouts\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workouts",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Workout",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"workouts\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"title\": \"string\"\n        },\n        \"relationships\": {\n            \"user\": {\n                \"data\": {\n                    \"type\": \"users\",\n                    \"id\": \"1\"\n                }\n            },\n            \"exercises\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercises\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"workoutRecords\": {\n                \"data\": [\n                    {\n                        \"type\": \"workout_records\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/workouts\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workouts",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Workout",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/workouts\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workouts",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Workout",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/workouts\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workouts",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Exercise",
+            "description": "",
+            "item": [
+                {
+                    "name": "Exercise List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercises\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercises",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Exercise",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"exercises\",\n        \"attributes\": {\n            \"title\": \"string\",\n            \"numberOfSets\": \"integer\",\n            \"reps\": \"integer\",\n            \"rest\": \"integer\"\n        },\n        \"relationships\": {\n            \"superset\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercises\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"workout\": {\n                \"data\": {\n                    \"type\": \"workouts\",\n                    \"id\": \"1\"\n                }\n            },\n            \"exerciseSummary\": {\n                \"data\": {\n                    \"type\": \"exercise_summaries\",\n                    \"id\": \"1\"\n                }\n            },\n            \"exerciseRecords\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercise_records\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/exercises\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercises",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Exercise",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"exercises\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"title\": \"string\",\n            \"numberOfSets\": \"integer\",\n            \"reps\": \"integer\",\n            \"rest\": \"integer\"\n        },\n        \"relationships\": {\n            \"superset\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercises\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"workout\": {\n                \"data\": {\n                    \"type\": \"workouts\",\n                    \"id\": \"1\"\n                }\n            },\n            \"exerciseSummary\": {\n                \"data\": {\n                    \"type\": \"exercise_summaries\",\n                    \"id\": \"1\"\n                }\n            },\n            \"exerciseRecords\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercise_records\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/exercises\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercises",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Exercise",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercises\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercises",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Exercise",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercises\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercises",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "WorkoutRecord",
+            "description": "",
+            "item": [
+                {
+                    "name": "WorkoutRecord List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/workout\/records\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workout\/records",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add WorkoutRecord",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"workout_records\",\n        \"attributes\": {\n            \"dateRecorded\": \"datetime\"\n        },\n        \"relationships\": {\n            \"workout\": {\n                \"data\": {\n                    \"type\": \"workouts\",\n                    \"id\": \"1\"\n                }\n            },\n            \"exerciseRecords\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercise_records\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/workout\/records\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workout\/records",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit WorkoutRecord",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"workout_records\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"dateRecorded\": \"datetime\"\n        },\n        \"relationships\": {\n            \"workout\": {\n                \"data\": {\n                    \"type\": \"workouts\",\n                    \"id\": \"1\"\n                }\n            },\n            \"exerciseRecords\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercise_records\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/workout\/records\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workout\/records",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete WorkoutRecord",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/workout\/records\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workout\/records",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get WorkoutRecord",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/workout\/records\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/workout\/records",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ExerciseRecord",
+            "description": "",
+            "item": [
+                {
+                    "name": "ExerciseRecord List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercise\/records\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/records",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add ExerciseRecord",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"exercise_records\",\n        \"attributes\": {\n            \"title\": \"string\",\n            \"dateRecorded\": \"datetime\",\n            \"isComplete\": \"boolean\"\n        },\n        \"relationships\": {\n            \"exercise\": {\n                \"data\": {\n                    \"type\": \"exercises\",\n                    \"id\": \"1\"\n                }\n            },\n            \"workoutRecord\": {\n                \"data\": {\n                    \"type\": \"workout_records\",\n                    \"id\": \"1\"\n                }\n            },\n            \"sets\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercise_record_sets\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/exercise\/records\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/records",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit ExerciseRecord",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"exercise_records\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"title\": \"string\",\n            \"dateRecorded\": \"datetime\",\n            \"isComplete\": \"boolean\"\n        },\n        \"relationships\": {\n            \"exercise\": {\n                \"data\": {\n                    \"type\": \"exercises\",\n                    \"id\": \"1\"\n                }\n            },\n            \"workoutRecord\": {\n                \"data\": {\n                    \"type\": \"workout_records\",\n                    \"id\": \"1\"\n                }\n            },\n            \"sets\": {\n                \"data\": [\n                    {\n                        \"type\": \"exercise_record_sets\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/exercise\/records\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/records",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete ExerciseRecord",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercise\/records\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/records",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get ExerciseRecord",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercise\/records\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/records",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ExerciseRecordSet",
+            "description": "",
+            "item": [
+                {
+                    "name": "ExerciseRecordSet List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercise\/record\/sets\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/record\/sets",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add ExerciseRecordSet",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"exercise_record_sets\",\n        \"attributes\": {\n            \"reps\": \"integer\",\n            \"weight\": \"decimal\",\n            \"rest\": \"integer\",\n            \"isComplete\": \"boolean\"\n        },\n        \"relationships\": {\n            \"exerciseRecord\": {\n                \"data\": {\n                    \"type\": \"exercise_records\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/exercise\/record\/sets\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/record\/sets",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit ExerciseRecordSet",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"exercise_record_sets\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"reps\": \"integer\",\n            \"weight\": \"decimal\",\n            \"rest\": \"integer\",\n            \"isComplete\": \"boolean\"\n        },\n        \"relationships\": {\n            \"exerciseRecord\": {\n                \"data\": {\n                    \"type\": \"exercise_records\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/exercise\/record\/sets\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/record\/sets",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete ExerciseRecordSet",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercise\/record\/sets\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/record\/sets",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get ExerciseRecordSet",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/exercise\/record\/sets\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/exercise\/record\/sets",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
         }
     ]
 }
