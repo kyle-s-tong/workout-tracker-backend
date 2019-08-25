@@ -55,6 +55,12 @@ class UserResourceTransformer extends AbstractResource
             'roles' => function (User $user) {
                 return $user->getRoles();
             },
+            'first-name' => function (User $user) {
+                return $user->getFirstName();
+            },
+            'last-name' => function (User $user) {
+                return $user->getLastName();
+            },
         ];
     }
 
