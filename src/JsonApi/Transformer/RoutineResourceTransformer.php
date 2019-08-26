@@ -52,6 +52,9 @@ class RoutineResourceTransformer extends AbstractResource
             'name' => function (Routine $routine) {
                 return $routine->getName();
             },
+            'is-active' => function (Routine $routine) {
+                return $routine->getIsActive();
+            }
         ];
     }
 

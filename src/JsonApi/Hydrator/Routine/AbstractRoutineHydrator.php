@@ -6,6 +6,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Entity\Routine;
 use Paknahad\JsonApiBundle\Hydrator\ValidatorTrait;
 use Paknahad\JsonApiBundle\Hydrator\AbstractHydrator;
+use Symfony\Component\Validator\Validation;
 use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
 use WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface;
 
@@ -61,6 +62,7 @@ abstract class AbstractRoutineHydrator extends AbstractHydrator
      */
     protected function validateRequest(JsonApiRequestInterface $request): void
     {
+        
         $this->validateFields($this->objectManager->getClassMetadata(Routine::class), $request);
     }
 
@@ -81,5 +83,27 @@ abstract class AbstractRoutineHydrator extends AbstractHydrator
     {
         return [
         ];
+    }
+
+    protected function validateFields(\Doctrine\Common\Persistence\Mapping\ClassMetadata $metadata, \WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface $request, bool $validExistance = true): void
+    {
+        foreach ($request->getResourceAttributes() as $field => $value) {
+            if ($validExistance && !$metadata->hasField($this->dashesToCamelCase($field))) {
+                throw new ValidatorException('This attribute does not exist');
+            }
+        }
+    }
+
+
+    private function dashesToCamelCase($string, $capitalizeFirstCharacter = false) 
+    {
+    
+        $str = str_replace('-', '', ucwords($string, '-'));
+    
+        if (!$capitalizeFirstCharacter) {
+            $str = lcfirst($str);
+        }
+    
+        return $str;
     }
 }

@@ -18,6 +18,9 @@ class UpdateRoutineHydrator extends AbstractRoutineHydrator
             'name' => function (Routine $routine, $attribute, $data, $attributeName) {
                 $routine->setName($attribute);
             },
+            'is-active' => function (Routine $routine, $attribute, $data, $attributeName) {
+                $routine->setIsActive($attribute);
+            },
         ];
     }
 }

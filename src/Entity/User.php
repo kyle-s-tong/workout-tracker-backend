@@ -55,10 +55,16 @@ class User implements UserInterface
      */
     private $workouts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Routine", mappedBy="user", orphanRemoval=true)
+     */
+    private $routines;
+
     public function __construct()
     {
         $this->tokens = new ArrayCollection();
         $this->workouts = new ArrayCollection();
+        $this->routines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -221,6 +227,37 @@ class User implements UserInterface
     public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Routine[]
+     */
+    public function getRoutines(): Collection
+    {
+        return $this->routines;
+    }
+
+    public function addRoutine(Routine $routine): self
+    {
+        if (!$this->routines->contains($routine)) {
+            $this->routines[] = $routine;
+            $routine->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoutine(Routine $routine): self
+    {
+        if ($this->routines->contains($routine)) {
+            $this->routines->removeElement($routine);
+            // set the owning side to null (unless already changed)
+            if ($routine->getUser() === $this) {
+                $routine->setUser(null);
+            }
+        }
 
         return $this;
     }

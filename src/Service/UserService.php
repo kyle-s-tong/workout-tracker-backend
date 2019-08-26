@@ -66,14 +66,16 @@ class UserService
         $expiry->add(new \DateInterval('PT' . \strval(\ini_get('session.cookie_lifetime')). 'M'));
 
         $token = new Token();
-        $token->setValue(bin2hex(random_bytes(16)));
-        $token->setExpiryDate($expiry);
-        $token->setUser($user);
-        $token->setEnabled(true);
+        $token
+            ->setValue(bin2hex(random_bytes(16)))
+            ->setExpiryDate($expiry)
+            ->setUser($user)
+            ->setEnabled(true);
 
-        $this->em->persist($token);
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->em
+            ->persist($token)
+            ->persist($user)
+            ->flush();
 
         return $token;
     }

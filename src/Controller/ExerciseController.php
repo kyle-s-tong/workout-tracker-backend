@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/exercises")
+ * @Route("/api/exercises")
  */
 class ExerciseController extends Controller
 {

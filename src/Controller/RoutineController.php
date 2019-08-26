@@ -18,12 +18,12 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/routines")
+ * @Route("/api/routines")
  */
 class RoutineController extends Controller
 {
     /**
-     * @Route("/", name="routines_index", methods="GET")
+     * @Route("", name="routines_index", methods="GET")
      */
     public function index(RoutineRepository $routineRepository, ResourceCollection $resourceCollection): ResponseInterface
     {
@@ -38,7 +38,7 @@ class RoutineController extends Controller
     }
 
     /**
-     * @Route("/", name="routines_new", methods="POST")
+     * @Route("", name="routines_new", methods="POST")
      */
     public function new(ValidatorInterface $validator): ResponseInterface
     {
