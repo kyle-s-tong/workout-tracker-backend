@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class WorkoutController extends Controller
 {
     /**
-     * @Route("/", name="workouts_index", methods="GET")
+     * @Route("", name="workouts_index", methods="GET")
      */
     public function index(WorkoutRepository $workoutRepository, ResourceCollection $resourceCollection): ResponseInterface
     {
@@ -38,7 +38,7 @@ class WorkoutController extends Controller
     }
 
     /**
-     * @Route("/", name="workouts_new", methods="POST")
+     * @Route("", name="workouts_new", methods="POST")
      */
     public function new(ValidatorInterface $validator): ResponseInterface
     {
