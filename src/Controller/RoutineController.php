@@ -9,6 +9,7 @@ use App\JsonApi\Hydrator\Routine\CreateRoutineHydrator;
 use App\JsonApi\Hydrator\Routine\UpdateRoutineHydrator;
 use App\JsonApi\Transformer\RoutineResourceTransformer;
 use App\Repository\RoutineRepository;
+use App\Service\UserService;
 use Paknahad\JsonApiBundle\Controller\Controller;
 use Paknahad\JsonApiBundle\Helper\ResourceCollection;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +41,7 @@ class RoutineController extends Controller
     /**
      * @Route("", name="routines_new", methods="POST")
      */
-    public function new(ValidatorInterface $validator): ResponseInterface
+    public function new(ValidatorInterface $validator, Request $request, UserService $userService): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -52,6 +53,11 @@ class RoutineController extends Controller
             return $this->validationErrorResponse($errors);
         }
 
+        $user = $userService->getUserFromRequestHeader($request);
+        if ($user) {
+            $routine->setUser($user);
+        }
+        
         $entityManager->persist($routine);
         $entityManager->flush();
 
