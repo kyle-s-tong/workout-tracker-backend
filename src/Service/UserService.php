@@ -72,10 +72,10 @@ class UserService
             ->setUser($user)
             ->setEnabled(true);
 
-        $this->em
-            ->persist($token)
-            ->persist($user)
-            ->flush();
+        $this->em->persist($token);
+        $this->em->persist($user);
+        
+        $this->em->flush();
 
         return $token;
     }

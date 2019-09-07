@@ -53,9 +53,11 @@ class RoutineController extends Controller
             return $this->validationErrorResponse($errors);
         }
 
-        $user = $userService->getUserFromRequestHeader($request);
-        if ($user) {
-            $routine->setUser($user);
+        if (!$routine->getUser()) {
+            $user = $userService->getUserFromRequestHeader($request);
+            if ($user) {
+                $routine->setUser($user);
+            }
         }
         
         $entityManager->persist($routine);

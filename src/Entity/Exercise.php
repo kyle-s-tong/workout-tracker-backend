@@ -51,7 +51,7 @@ class Exercise
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ExerciseSummary", inversedBy="exercises")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $exerciseSummary;
 

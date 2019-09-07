@@ -126,23 +126,24 @@ abstract class AbstractExerciseHydrator extends AbstractHydrator
 
                 $exercise->setWorkout($association);
             },
-            'exerciseSummary' => function (Exercise $exercise, ToOneRelationship $exerciseSummary, $data, $relationshipName) {
-                $this->validateRelationType($exerciseSummary, ['exercise_summaries']);
+            // TODO: Maybe add back in later. Not worrying about summaries for now.
+            // 'exerciseSummary' => function (Exercise $exercise, ToOneRelationship $exerciseSummary, $data, $relationshipName) {
+            //     $this->validateRelationType($exerciseSummary, ['exercise_summaries']);
 
 
-                $association = null;
-                $identifier = $exerciseSummary->getResourceIdentifier();
-                if ($identifier) {
-                    $association = $this->objectManager->getRepository('App\Entity\ExerciseSummary')
-                        ->find($identifier->getId());
+            //     $association = null;
+            //     $identifier = $exerciseSummary->getResourceIdentifier();
+            //     if ($identifier) {
+            //         $association = $this->objectManager->getRepository('App\Entity\ExerciseSummary')
+            //             ->find($identifier->getId());
 
-                    if (is_null($association)) {
-                        throw new InvalidRelationshipValueException($relationshipName, [$identifier->getId()]);
-                    }
-                }
+            //         if (is_null($association)) {
+            //             throw new InvalidRelationshipValueException($relationshipName, [$identifier->getId()]);
+            //         }
+            //     }
 
-                $exercise->setExerciseSummary($association);
-            },
+            //     $exercise->setExerciseSummary($association);
+            // },
             'exerciseRecords' => function (Exercise $exercise, ToManyRelationship $exerciseRecords, $data, $relationshipName) {
                 $this->validateRelationType($exerciseRecords, ['exercise_records']);
 
@@ -169,5 +170,27 @@ abstract class AbstractExerciseHydrator extends AbstractHydrator
                 }
             },
         ];
+    }
+
+    protected function validateFields(\Doctrine\Common\Persistence\Mapping\ClassMetadata $metadata, \WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface $request, bool $validExistance = true): void
+    {
+        foreach ($request->getResourceAttributes() as $field => $value) {
+            if ($validExistance && !$metadata->hasField($this->dashesToCamelCase($field))) {
+                throw new ValidatorException('This attribute does not exist');
+            }
+        }
+    }
+
+
+    private function dashesToCamelCase($string, $capitalizeFirstCharacter = false) 
+    {
+    
+        $str = str_replace('-', '', ucwords($string, '-'));
+    
+        if (!$capitalizeFirstCharacter) {
+            $str = lcfirst($str);
+        }
+    
+        return $str;
     }
 }

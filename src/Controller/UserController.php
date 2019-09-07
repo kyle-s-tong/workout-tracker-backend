@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\JsonApi\Hydrator\User\CreateUserHydrator;
 use App\JsonApi\Hydrator\User\UpdateUserHydrator;
 use Paknahad\JsonApiBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\JsonApi\Transformer\UserResourceTransformer;
 use Paknahad\JsonApiBundle\Helper\ResourceCollection;
 use Symfony\Component\Validator\ConstraintViolationList;

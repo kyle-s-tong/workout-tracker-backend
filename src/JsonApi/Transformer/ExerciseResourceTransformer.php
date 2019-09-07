@@ -54,7 +54,7 @@ class ExerciseResourceTransformer extends AbstractResource
             'title' => function (Exercise $exercise) {
                 return $exercise->getTitle();
             },
-            'numberOfSets' => function (Exercise $exercise) {
+            'number-of-sets' => function (Exercise $exercise) {
                 return $exercise->getNumberOfSets();
             },
             'reps' => function (Exercise $exercise) {
@@ -88,11 +88,12 @@ class ExerciseResourceTransformer extends AbstractResource
                 return ToOneRelationship::create()
                     ->setData($exercise->getWorkout(), new WorkoutResourceTransformer());
             },
-            'exerciseSummary' => function (Exercise $exercise) {
-                return ToOneRelationship::create()
-                    ->setData($exercise->getExerciseSummary(), new ExerciseSummaryResourceTransformer());
-            },
-            'exerciseRecords' => function (Exercise $exercise) {
+            // TODO: Maybe add back in later. Not worrying about summaries for now.
+            // 'exerciseSummary' => function (Exercise $exercise) {
+            //     return ToOneRelationship::create()
+            //         ->setData($exercise->getExerciseSummary(), new ExerciseSummaryResourceTransformer());
+            // },
+            'exercise-records' => function (Exercise $exercise) {
                 return ToManyRelationship::create()
                     ->setData($exercise->getExerciseRecords(), new ExerciseRecordResourceTransformer());
             },

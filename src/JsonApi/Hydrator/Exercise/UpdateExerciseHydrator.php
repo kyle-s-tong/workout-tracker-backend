@@ -18,7 +18,7 @@ class UpdateExerciseHydrator extends AbstractExerciseHydrator
             'title' => function (Exercise $exercise, $attribute, $data, $attributeName) {
                 $exercise->setTitle($attribute);
             },
-            'numberOfSets' => function (Exercise $exercise, $attribute, $data, $attributeName) {
+            'number-of-sets' => function (Exercise $exercise, $attribute, $data, $attributeName) {
                 $exercise->setNumberOfSets($attribute);
             },
             'reps' => function (Exercise $exercise, $attribute, $data, $attributeName) {

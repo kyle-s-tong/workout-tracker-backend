@@ -10,6 +10,7 @@ use Paknahad\JsonApiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\HttpNotFoundException;
 
 
 /**
@@ -25,6 +26,10 @@ class SecurityController extends Controller
       $requestData = json_decode($request->getContent());
       $user = $entityManager->getRepository(User::class)
                   ->findOneByEmail($requestData->email);
+
+      if (!$user) {
+        throw new HttpNotFoundException('User not found');
+      }
 
       $token = $userService->getExistingEnabledUserToken($user);
       if (!$token) {

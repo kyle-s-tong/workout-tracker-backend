@@ -31,7 +31,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        return 'login' !== $request->get('_route');
+        return $request->get('_route') !== 'login';
     }
 
     /**
