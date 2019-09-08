@@ -35,7 +35,7 @@ class ExerciseRecordDocument extends AbstractSingleResourceDocument
     {
         return Links::createWithoutBaseUri(
             [
-                'self' => new Link('/exercise/records/'.$this->getResourceId()),
+                'self' => new Link('/exercise-records/'.$this->getResourceId()),
             ]
         );
     }

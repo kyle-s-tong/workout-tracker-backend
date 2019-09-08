@@ -2,16 +2,17 @@
 
 namespace App\JsonApi\Hydrator\WorkoutRecord;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Doctrine\ORM\Query\Expr;
 use App\Entity\WorkoutRecord;
 use Paknahad\JsonApiBundle\Hydrator\ValidatorTrait;
 use Paknahad\JsonApiBundle\Hydrator\AbstractHydrator;
-use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
-use Doctrine\ORM\Query\Expr;
-use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToManyRelationship;
-use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToOneRelationship;
-use Paknahad\JsonApiBundle\Exception\InvalidRelationshipValueException;
 use WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToOneRelationship;
+use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToManyRelationship;
+use Paknahad\JsonApiBundle\Exception\InvalidRelationshipValueException;
 
 /**
  * Abstract WorkoutRecord Hydrator.
@@ -49,7 +50,7 @@ abstract class AbstractWorkoutRecordHydrator extends AbstractHydrator
      */
     protected function getAcceptedTypes(): array
     {
-        return ['workout_records'];
+        return ['workout-records'];
     }
 
     /**
@@ -101,7 +102,7 @@ abstract class AbstractWorkoutRecordHydrator extends AbstractHydrator
 
                 $workoutRecord->setWorkout($association);
             },
-            'exerciseRecords' => function (WorkoutRecord $workoutRecord, ToManyRelationship $exerciseRecords, $data, $relationshipName) {
+            'exercise-records' => function (WorkoutRecord $workoutRecord, ToManyRelationship $exerciseRecords, $data, $relationshipName) {
                 $this->validateRelationType($exerciseRecords, ['exercise_records']);
 
                 if (count($exerciseRecords->getResourceIdentifierIds()) > 0) {
@@ -127,5 +128,26 @@ abstract class AbstractWorkoutRecordHydrator extends AbstractHydrator
                 }
             },
         ];
+    }
+
+    protected function validateFields(\Doctrine\Common\Persistence\Mapping\ClassMetadata $metadata, \WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface $request, bool $validExistance = true): void
+    {
+        foreach ($request->getResourceAttributes() as $field => $value) {
+            if ($validExistance && !$metadata->hasField($this->dashesToCamelCase($field))) {
+                throw new ValidatorException('This attribute does not exist');
+            }
+        }
+    }
+
+    private function dashesToCamelCase($string, $capitalizeFirstCharacter = false) 
+    {
+    
+        $str = str_replace('-', '', ucwords($string, '-'));
+    
+        if (!$capitalizeFirstCharacter) {
+            $str = lcfirst($str);
+        }
+    
+        return $str;
     }
 }

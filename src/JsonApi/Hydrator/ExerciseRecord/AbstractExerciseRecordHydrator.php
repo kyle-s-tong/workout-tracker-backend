@@ -2,16 +2,17 @@
 
 namespace App\JsonApi\Hydrator\ExerciseRecord;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Doctrine\ORM\Query\Expr;
 use App\Entity\ExerciseRecord;
 use Paknahad\JsonApiBundle\Hydrator\ValidatorTrait;
 use Paknahad\JsonApiBundle\Hydrator\AbstractHydrator;
-use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
-use Doctrine\ORM\Query\Expr;
-use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToManyRelationship;
-use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToOneRelationship;
-use Paknahad\JsonApiBundle\Exception\InvalidRelationshipValueException;
 use WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToOneRelationship;
+use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToManyRelationship;
+use Paknahad\JsonApiBundle\Exception\InvalidRelationshipValueException;
 
 /**
  * Abstract ExerciseRecord Hydrator.
@@ -49,7 +50,7 @@ abstract class AbstractExerciseRecordHydrator extends AbstractHydrator
      */
     protected function getAcceptedTypes(): array
     {
-        return ['exercise_records'];
+        return ['exercise-records'];
     }
 
     /**
@@ -101,8 +102,8 @@ abstract class AbstractExerciseRecordHydrator extends AbstractHydrator
 
                 $exerciseRecord->setExercise($association);
             },
-            'workoutRecord' => function (ExerciseRecord $exerciseRecord, ToOneRelationship $workoutRecord, $data, $relationshipName) {
-                $this->validateRelationType($workoutRecord, ['workout_records']);
+            'workout-record' => function (ExerciseRecord $exerciseRecord, ToOneRelationship $workoutRecord, $data, $relationshipName) {
+                $this->validateRelationType($workoutRecord, ['workout-records']);
 
 
                 $association = null;
@@ -117,32 +118,31 @@ abstract class AbstractExerciseRecordHydrator extends AbstractHydrator
                 }
 
                 $exerciseRecord->setWorkoutRecord($association);
-            },
-            'sets' => function (ExerciseRecord $exerciseRecord, ToManyRelationship $sets, $data, $relationshipName) {
-                $this->validateRelationType($sets, ['exercise_record_sets']);
-
-                if (count($sets->getResourceIdentifierIds()) > 0) {
-                    $association = $this->objectManager->getRepository('App\Entity\ExerciseRecordSet')
-                        ->createQueryBuilder('s')
-                        ->where((new Expr())->in('s.id', $sets->getResourceIdentifierIds()))
-                        ->getQuery()
-                        ->getResult();
-
-                    $this->validateRelationValues($association, $sets->getResourceIdentifierIds(), $relationshipName);
-                } else {
-                    $association = [];
-                }
-
-                if ($exerciseRecord->getSets()->count() > 0) {
-                    foreach ($exerciseRecord->getSets() as $set) {
-                        $exerciseRecord->removeSet($set);
-                    }
-                }
-
-                foreach ($association as $set) {
-                    $exerciseRecord->addSet($set);
-                }
-            },
+            }
         ];
+    }
+
+    protected function validateFields(\Doctrine\Common\Persistence\Mapping\ClassMetadata $metadata, \WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface $request, bool $validExistance = true): void
+    {
+        foreach ($request->getResourceAttributes() as $field => $value) {
+            if ($validExistance && !$metadata->hasField($this->dashesToCamelCase($field))) {
+                var_dump($field);
+                var_dump($metadata);
+                die();
+                throw new ValidatorException('This attribute does not exist');
+            }
+        }
+    }
+
+    private function dashesToCamelCase($string, $capitalizeFirstCharacter = false) 
+    {
+    
+        $str = str_replace('-', '', ucwords($string, '-'));
+    
+        if (!$capitalizeFirstCharacter) {
+            $str = lcfirst($str);
+        }
+    
+        return $str;
     }
 }

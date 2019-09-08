@@ -18,12 +18,12 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/workout/records")
+ * @Route("api/workout-records")
  */
 class WorkoutRecordController extends Controller
 {
     /**
-     * @Route("/", name="workout_records_index", methods="GET")
+     * @Route("", name="workout_records_index", methods="GET")
      */
     public function index(WorkoutRecordRepository $workoutRecordRepository, ResourceCollection $resourceCollection): ResponseInterface
     {
@@ -38,7 +38,7 @@ class WorkoutRecordController extends Controller
     }
 
     /**
-     * @Route("/", name="workout_records_new", methods="POST")
+     * @Route("", name="workout_records_new", methods="POST")
      */
     public function new(ValidatorInterface $validator): ResponseInterface
     {

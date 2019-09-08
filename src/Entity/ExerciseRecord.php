@@ -34,6 +34,11 @@ class ExerciseRecord
     private $isComplete;
 
     /**
+     * @ORM\Column(type="json_array")
+     */
+    private $sets;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Exercise", inversedBy="exerciseRecords")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -44,11 +49,6 @@ class ExerciseRecord
      * @ORM\JoinColumn(nullable=false)
      */
     private $workoutRecord;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseRecordSet", mappedBy="exerciseRecord", orphanRemoval=true)
-     */
-    private $sets;
 
     public function __construct()
     {
@@ -120,33 +120,14 @@ class ExerciseRecord
         return $this;
     }
 
-    /**
-     * @return Collection|ExerciseRecordSet[]
-     */
-    public function getSets(): Collection
+    public function getSets()
     {
         return $this->sets;
     }
 
-    public function addSet(ExerciseRecordSet $set): self
+    public function setSets($sets): self
     {
-        if (!$this->sets->contains($set)) {
-            $this->sets[] = $set;
-            $set->setExerciseRecord($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSet(ExerciseRecordSet $set): self
-    {
-        if ($this->sets->contains($set)) {
-            $this->sets->removeElement($set);
-            // set the owning side to null (unless already changed)
-            if ($set->getExerciseRecord() === $this) {
-                $set->setExerciseRecord(null);
-            }
-        }
+        $this->sets = $sets;
 
         return $this;
     }

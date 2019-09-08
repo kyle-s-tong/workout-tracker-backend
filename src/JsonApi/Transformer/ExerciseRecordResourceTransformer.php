@@ -54,11 +54,14 @@ class ExerciseRecordResourceTransformer extends AbstractResource
             'title' => function (ExerciseRecord $exerciseRecord) {
                 return $exerciseRecord->getTitle();
             },
-            'dateRecorded' => function (ExerciseRecord $exerciseRecord) {
+            'date-recorded' => function (ExerciseRecord $exerciseRecord) {
                 return $exerciseRecord->getDateRecorded()->format(DATE_ATOM);
             },
-            'isComplete' => function (ExerciseRecord $exerciseRecord) {
+            'is-complete' => function (ExerciseRecord $exerciseRecord) {
                 return $exerciseRecord->getIsComplete();
+            },
+            'sets' => function (ExerciseRecord $exerciseRecord) {
+                return $exerciseRecord->getSets();
             },
         ];
     }
@@ -81,14 +84,10 @@ class ExerciseRecordResourceTransformer extends AbstractResource
                 return ToOneRelationship::create()
                     ->setData($exerciseRecord->getExercise(), new ExerciseResourceTransformer());
             },
-            'workoutRecord' => function (ExerciseRecord $exerciseRecord) {
+            'workout-record' => function (ExerciseRecord $exerciseRecord) {
                 return ToOneRelationship::create()
                     ->setData($exerciseRecord->getWorkoutRecord(), new WorkoutRecordResourceTransformer());
-            },
-            'sets' => function (ExerciseRecord $exerciseRecord) {
-                return ToManyRelationship::create()
-                    ->setData($exerciseRecord->getSets(), new ExerciseRecordSetResourceTransformer());
-            },
+            }
         ];
     }
 }

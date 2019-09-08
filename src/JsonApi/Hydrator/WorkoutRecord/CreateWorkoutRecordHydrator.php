@@ -15,7 +15,7 @@ class CreateWorkoutRecordHydrator extends AbstractWorkoutRecordHydrator
     protected function getAttributeHydrator($workoutRecord): array
     {
         return [
-            'dateRecorded' => function (WorkoutRecord $workoutRecord, $attribute, $data, $attributeName) {
+            'date-recorded' => function (WorkoutRecord $workoutRecord, $attribute, $data, $attributeName) {
                 $workoutRecord->setDateRecorded(new \DateTime($attribute));
             },
         ];

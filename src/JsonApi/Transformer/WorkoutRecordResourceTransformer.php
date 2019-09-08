@@ -51,7 +51,7 @@ class WorkoutRecordResourceTransformer extends AbstractResource
     public function getAttributes($workoutRecord): array
     {
         return [
-            'dateRecorded' => function (WorkoutRecord $workoutRecord) {
+            'date-recorded' => function (WorkoutRecord $workoutRecord) {
                 return $workoutRecord->getDateRecorded()->format(DATE_ATOM);
             },
         ];
@@ -75,7 +75,7 @@ class WorkoutRecordResourceTransformer extends AbstractResource
                 return ToOneRelationship::create()
                     ->setData($workoutRecord->getWorkout(), new WorkoutResourceTransformer());
             },
-            'exerciseRecords' => function (WorkoutRecord $workoutRecord) {
+            'exercise-records' => function (WorkoutRecord $workoutRecord) {
                 return ToManyRelationship::create()
                     ->setData($workoutRecord->getExerciseRecords(), new ExerciseRecordResourceTransformer());
             },

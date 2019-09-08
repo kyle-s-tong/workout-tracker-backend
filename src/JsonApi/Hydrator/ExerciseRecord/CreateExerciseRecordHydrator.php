@@ -18,11 +18,14 @@ class CreateExerciseRecordHydrator extends AbstractExerciseRecordHydrator
             'title' => function (ExerciseRecord $exerciseRecord, $attribute, $data, $attributeName) {
                 $exerciseRecord->setTitle($attribute);
             },
-            'dateRecorded' => function (ExerciseRecord $exerciseRecord, $attribute, $data, $attributeName) {
+            'date-recorded' => function (ExerciseRecord $exerciseRecord, $attribute, $data, $attributeName) {
                 $exerciseRecord->setDateRecorded(new \DateTime($attribute));
             },
-            'isComplete' => function (ExerciseRecord $exerciseRecord, $attribute, $data, $attributeName) {
+            'is-complete' => function (ExerciseRecord $exerciseRecord, $attribute, $data, $attributeName) {
                 $exerciseRecord->setIsComplete($attribute);
+            },
+            'sets' => function (ExerciseRecord $exerciseRecord, $attribute, $data, $attributeName) {
+                $exerciseRecord->setSets($attribute);
             },
         ];
     }
