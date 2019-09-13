@@ -13,3 +13,8 @@
 ###< symfony/web-server-bundle ###
 
 /mysql/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

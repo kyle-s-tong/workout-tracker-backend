@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Service\UserService;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Paknahad\JsonApiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,8 +23,9 @@ class SecurityController extends Controller
     public function login(Request $request, UserService $userService, EntityManagerInterface $entityManager): JsonResponse
     {
       $requestData = json_decode($request->getContent());
-      $user = $entityManager->getRepository(User::class)
-                  ->findOneByEmail($requestData->email);
+      $user = $entityManager
+                ->getRepository(User::class)
+                ->findOneByEmail($requestData->email);
 
       if (!$user) {
         throw new HttpNotFoundException('User not found');
