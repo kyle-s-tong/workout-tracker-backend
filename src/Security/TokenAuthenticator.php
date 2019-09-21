@@ -31,7 +31,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        return $request->get('_route') !== 'login';
+        return !$this->isRoute($request, 'users_new', 'post');
     }
 
     /**
@@ -124,5 +124,11 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function supportsRememberMe()
     {
         return false;
+    }
+
+
+    private function isRoute(Request $request, $routeName, $method)
+    {
+        return $request->get('_route') === $routeName && $request->isMethod(strtoupper($method));
     }
 }

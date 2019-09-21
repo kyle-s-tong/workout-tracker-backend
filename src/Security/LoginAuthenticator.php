@@ -35,7 +35,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        return ($request->get('_route') === 'login' && $request->isMethod('POST'));
+        return $this->isRoute($request, 'login', 'post');
     }
 
     /**
@@ -100,5 +100,10 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
     public function supportsRememberMe()
     {
         return false;
+    }
+
+    private function isRoute(Request $request, $routeName, $method)
+    {
+        return $request->get('_route') === $routeName && $request->isMethod(strtoupper($method));
     }
 }
