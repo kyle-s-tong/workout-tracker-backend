@@ -2,12 +2,13 @@
 
 namespace App\JsonApi\Hydrator\User;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Entity\User;
 use Paknahad\JsonApiBundle\Hydrator\ValidatorTrait;
 use Paknahad\JsonApiBundle\Hydrator\AbstractHydrator;
-use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
 use WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Abstract User Hydrator.
@@ -81,5 +82,29 @@ abstract class AbstractUserHydrator extends AbstractHydrator
     {
         return [
         ];
+    }
+
+    protected function validateFields(\Doctrine\Common\Persistence\Mapping\ClassMetadata $metadata, \WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface $request, bool $validExistance = true): void
+    {
+        foreach ($request->getResourceAttributes() as $field => $value) {
+            if ($validExistance && !$metadata->hasField($this->dashesToCamelCase($field))) {
+                var_dump($field);
+                die();
+                throw new ValidatorException('This attribute does not exist');
+            }
+        }
+    }
+
+
+    private function dashesToCamelCase($string, $capitalizeFirstCharacter = false) 
+    {
+    
+        $str = str_replace('-', '', ucwords($string, '-'));
+    
+        if (!$capitalizeFirstCharacter) {
+            $str = lcfirst($str);
+        }
+    
+        return $str;
     }
 }

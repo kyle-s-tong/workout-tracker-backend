@@ -60,6 +60,11 @@ class User implements UserInterface
      */
     private $routines;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $activeRoutine;
+
     public function __construct()
     {
         $this->tokens = new ArrayCollection();
@@ -258,6 +263,18 @@ class User implements UserInterface
                 $routine->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActiveRoutine(): ?int
+    {
+        return $this->activeRoutine;
+    }
+
+    public function setActiveRoutine(?int $activeRoutine): self
+    {
+        $this->activeRoutine = $activeRoutine;
 
         return $this;
     }
