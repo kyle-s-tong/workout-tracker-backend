@@ -39,6 +39,12 @@ class Workout
      */
     private $workoutRecords;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Routine", inversedBy="workouts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $routine;
+
     public function __construct()
     {
         $this->exercises = new ArrayCollection();
@@ -129,6 +135,18 @@ class Workout
                 $workoutRecord->setWorkout(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRoutine(): ?Routine
+    {
+        return $this->routine;
+    }
+
+    public function setRoutine(?Routine $routine): self
+    {
+        $this->routine = $routine;
 
         return $this;
     }
