@@ -5,6 +5,7 @@ namespace App\JsonApi\Transformer;
 use App\Entity\Routine;
 use WoohooLabs\Yin\JsonApi\Schema\Links;
 use WoohooLabs\Yin\JsonApi\Schema\Resource\AbstractResource;
+use WoohooLabs\Yin\JsonApi\Schema\Relationship\ToManyRelationship;
 
 /**
  * Routine Resource Transformer.
@@ -72,6 +73,10 @@ class RoutineResourceTransformer extends AbstractResource
     public function getRelationships($routine): array
     {
         return [
+            'workouts' => function (Routine $routine) {
+                return ToManyRelationship::create()
+                    ->setData($routine->getWorkouts(), new WorkoutResourceTransformer());
+            },
         ];
     }
 }
