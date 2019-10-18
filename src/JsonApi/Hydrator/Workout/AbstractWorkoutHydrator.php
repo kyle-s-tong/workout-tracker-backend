@@ -101,6 +101,23 @@ abstract class AbstractWorkoutHydrator extends AbstractHydrator
 
                 $workout->setUser($association);
             },
+            'routine' => function (Workout $workout, ToOneRelationship $routine, $data, $relationshipName) {
+                $this->validateRelationType($routine, ['routines']);
+
+
+                $association = null;
+                $identifier = $routine->getResourceIdentifier();
+                if ($identifier) {
+                    $association = $this->objectManager->getRepository('App\Entity\Routine')
+                        ->find($identifier->getId());
+
+                    if (is_null($association)) {
+                        throw new InvalidRelationshipValueException($relationshipName, [$identifier->getId()]);
+                    }
+                }
+
+                $workout->setRoutine($association);
+            },
             'exercises' => function (Workout $workout, ToManyRelationship $exercises, $data, $relationshipName) {
                 $this->validateRelationType($exercises, ['exercises']);
 
