@@ -33,6 +33,6 @@ class WorkoutRecordsDocument extends AbstractCollectionDocument
     public function getLinks(): Links
     {
         return Links::createWithoutBaseUri()
-            ->setPagination('/workout/records', $this->domainObject);
+            ->setPagination('/workout-records', $this->domainObject);
     }
 }
